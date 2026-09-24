@@ -3,10 +3,259 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Timestamp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+
+        Title="Cadastro de Informações"
+        Width="1100"
+        Height="656"
+        MinWidth="900"
+        MinHeight="600"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="25">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- CABEÇALHO -->
+        <StackPanel Grid.Row="0">
+
+            <TextBlock Text="Cadastro de informações"
+                       FontSize="28"
+                       FontWeight="SemiBold"/>
+
+        </StackPanel>
+
+
+        <!-- CONTEÚDO -->
+        <Grid Grid.Row="2" Height="507" VerticalAlignment="Top">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.3*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="0.8*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <!-- FORMULÁRIO -->
+            <Border Grid.Column="0"
+                    Padding="25"
+                    CornerRadius="10"
+                    BorderBrush="#DDDDDD"
+                    BorderThickness="1"
+                    Background="White" Grid.ColumnSpan="2" Margin="0,0,20,0" Height="496" VerticalAlignment="Top">
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="25"/>
+
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="18"/>
+
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="18"/>
+
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="18"/>
+
+                        <RowDefinition Height="Auto"/>
+
+                        <RowDefinition Height="*"/>
+
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+
+                    <!-- TÍTULO -->
+                    <StackPanel Grid.Row="0">
+
+                        <TextBlock Text="Informações do registro"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"/>
+
+                        <TextBlock Text="Preencha os campos abaixo."
+                                   Margin="0,5,0,0"
+                                   Foreground="Gray"/>
+
+                    </StackPanel>
+
+
+                    <!-- CAMPO TÍTULO -->
+                    <StackPanel Grid.Row="2">
+
+                        <TextBlock Text="Título *"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,6"/>
+
+                        <TextBox x:Name="txtTitulo"
+                                 Height="40"
+                                 Padding="10"
+                                 FontSize="14"/>
+
+                    </StackPanel>
+
+
+                    <!-- CATEGORIA -->
+                    <StackPanel Grid.Row="4">
+
+                        <TextBlock Text="Categoria *"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,6"/>
+
+                        <ComboBox x:Name="cmbCategoria"
+                                  Height="40"
+                                  Padding="8">
+
+                            <ComboBoxItem Content="Geral"/>
+                            <ComboBoxItem Content="Administrativo"/>
+                            <ComboBoxItem Content="Financeiro"/>
+                            <ComboBoxItem Content="Operacional"/>
+
+                        </ComboBox>
+
+                    </StackPanel>
+
+
+                    <!-- DESCRIÇÃO -->
+                    <StackPanel Grid.Row="6">
+
+                        <TextBlock Text="Descrição"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,6"/>
+
+                        <TextBox x:Name="txtDescricao"
+                                 Height="130"
+                                 Padding="10"
+                                 FontSize="14"
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto"/>
+
+                    </StackPanel>
+
+
+                    <!-- ÚLTIMA ATUALIZAÇÃO -->
+
+
+                    <!-- BOTÕES -->
+                    <StackPanel Grid.Row="10"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Right">
+
+                        <Button x:Name="btnCancelar"
+                                Content="Cancelar"
+                                Width="110"
+                                Height="40"
+                                Margin="0,0,10,0"/>
+
+                        <Button x:Name="btnSalvar"
+                                Content="Salvar"
+                                Width="120"
+                                Height="40"
+                                Click="BtnSalvar_Click"/>
+
+                    </StackPanel>
+
+                </Grid>
+
+            </Border>
+
+
+            <!-- HISTÓRICO -->
+            <Border Grid.Column="2"
+                    Padding="0"
+                    CornerRadius="10"
+                    BorderBrush="#DDDDDD"
+                    BorderThickness="1"
+                    Background="White" Height="496" VerticalAlignment="Top">
+
+                <Grid Margin="0,0,0,119">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+
+                    <!-- CABEÇALHO DO HISTÓRICO -->
+                    <Border Grid.Row="0"
+                            Padding="20"
+                            BorderBrush="#EEEEEE"
+                            BorderThickness="0,0,0,1">
+
+                        <StackPanel>
+
+                            <TextBlock Text="Histórico de alterações"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"/>
+
+                            <TextBlock Text="Registros realizados pelo sistema"
+                                       Margin="0,4,0,0"
+                                       FontSize="12"
+                                       Foreground="Gray"/>
+
+                        </StackPanel>
+
+                    </Border>
+
+
+                    <!-- LISTA -->
+                    <ScrollViewer Grid.Row="1"
+                                  VerticalScrollBarVisibility="Auto" Height="379" VerticalAlignment="Top" Grid.RowSpan="2">
+
+                        <ItemsControl x:Name="lstLogs"
+                                      Margin="20">
+
+                            <ItemsControl.ItemTemplate>
+
+                                <DataTemplate>
+
+                                    <Border Margin="0,0,0,12"
+                                            Padding="12"
+                                            CornerRadius="6"
+                                            Background="#F7F7F7"
+                                            BorderBrush="#E5E5E5"
+                                            BorderThickness="1">
+
+                                        <StackPanel>
+
+                                            <TextBlock Text="{Binding DataHora}"
+                                                       FontSize="11"
+                                                       Foreground="Gray"/>
+
+                                            <TextBlock Text="{Binding Descricao}"
+                                                       Margin="0,6,0,0"
+                                                       FontSize="14"
+                                                       FontWeight="SemiBold"
+                                                       TextWrapping="Wrap"/>
+
+                                        </StackPanel>
+
+                                    </Border>
+
+                                </DataTemplate>
+
+                            </ItemsControl.ItemTemplate>
+
+                        </ItemsControl>
+
+                    </ScrollViewer>
+
+
+                    <!-- RODAPÉ -->
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
 
     </Grid>
+
 </Window>
